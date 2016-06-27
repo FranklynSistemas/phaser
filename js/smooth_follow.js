@@ -1,4 +1,4 @@
-//var websocket = io.connect();
+var websocket = io.connect();
 var game = new Phaser.Game(screen.width, screen.height-120, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
@@ -67,9 +67,9 @@ function create() {
             dots.create(getRandomArbitrary(30, 1900),getRandomArbitrary(30, 1900),'dot');
         };
         var style = {font: "65px Arial"};
-        score = game.add.text(1800,20,puntos,style);
+        score = game.add.text(screen.width,20,puntos,style);
         score.fixedToCamera = true;
-        score.cameraOffset.setTo(1200, 20);
+        score.cameraOffset.setTo(screen.width-200, 20);
         console.log(players);
 
 }
