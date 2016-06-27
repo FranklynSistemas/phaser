@@ -40,12 +40,13 @@ function create() {
 
         
         players[myId] = game.add.sprite(game.world.centerX, game.world.centerY, 'pacman',0);
-        players[myId].anchor.set(0.5);
+        players[myId].anchor.setTo(0.5, 0.5);
         players[myId].animations.add('munch', [0, 1, 2, 1], 20, true);
 
 
         //game.physics.p2.enable(players[myId]);
-        game.physics.arcade.enable(players[myId]);
+        game.physics.enable(players[myId],Phaser.Physics.ARCADE);
+        players[myId].body.allowRotation = false;
         //players[0] = game.add.sprite(20, 20, 'player');
 
         players[myId].body.fixedRotation = true;
@@ -109,6 +110,8 @@ function update() {
             //websocket.emit('newplayer',{corx: players[myId].x,cory:players[myId].y});
         }
 
+        players[myId].rotation = game.physics.arcade.moveToPointer(players[myId], 20, game.input.activePointer, 1900);
+        
         game.physics.arcade.overlap(players[myId],dots,eatDot,null,this);
 
 }
